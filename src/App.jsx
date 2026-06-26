@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { BottomTabs } from "./stack/MobileShell";
 import { useSpruceInventory } from "./hooks/useSpruceInventory";
 import { SCREENS, SCREEN_ORDER, WORKFLOW_GROUPS } from "./workflows";
+import { assetUrl } from "./stack/assetUrl";
 import {
   HomeScreen,
   MapScreen,
@@ -139,7 +140,7 @@ export default function App() {
     <div className="st-app">
       <aside className="st-annotation-panel">
         <div className="st-annotation-header">
-          <img src="/stack-icons/sitetracker-lettermark-white.svg" alt="Sitetracker" />
+          <img src={assetUrl("stack-icons/sitetracker-lettermark-white.svg")} alt="Sitetracker" />
           <p>Mobile Inventory · all workflows</p>
         </div>
         <AnnotationPanel screenId={screen} onScreenChange={handleScreenChange} locateTab={locateTab} />

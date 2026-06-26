@@ -1,5 +1,6 @@
 import { C } from "./tokens";
 import StackIcon from "./StackIcon";
+import { assetUrl } from "./assetUrl";
 
 export function StatusBar() {
   return (
@@ -21,7 +22,7 @@ export function SiteTrackerHeader() {
       <div className="st-mobile-main-row">
         <img
           className="st-mobile-logo"
-          src="/stack-icons/sitetracker-lettermark-white.svg"
+          src={assetUrl("stack-icons/sitetracker-lettermark-white.svg")}
           alt="Sitetracker"
         />
         <button type="button" className="st-mobile-icon-btn st-mobile-notification" aria-label="Notifications">

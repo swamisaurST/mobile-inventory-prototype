@@ -2,21 +2,24 @@
  * STACK utility icon registry — monochrome paths only (no Standard/Action tile backgrounds).
  * Sync assets: npm run sync-icons
  */
-const catalog = (path) => `/stack-icons/catalog/${path}`;
+import { assetUrl } from "./assetUrl";
+
+const catalog = (path) => assetUrl(`stack-icons/catalog/${path}`);
+const icon = (path) => assetUrl(path);
 
 /** @type {Record<string, { src: string }>} */
 export const ICON_MAP = {
   // Shell (also in public/stack-icons/)
-  notification: { src: "/stack-icons/notification.svg" },
-  search: { src: "/stack-icons/search.svg" },
-  add: { src: "/stack-icons/add.svg" },
-  close: { src: "/stack-icons/close.svg" },
-  favorite: { src: "/stack-icons/favorite.svg" },
-  user: { src: "/stack-icons/user.svg" },
-  home: { src: "/stack-icons/home.svg" },
+  notification: { src: icon("stack-icons/notification.svg") },
+  search: { src: icon("stack-icons/search.svg") },
+  add: { src: icon("stack-icons/add.svg") },
+  close: { src: icon("stack-icons/close.svg") },
+  favorite: { src: icon("stack-icons/favorite.svg") },
+  user: { src: icon("stack-icons/user.svg") },
+  home: { src: icon("stack-icons/home.svg") },
   task: { src: catalog("Utility Icons/T/task.svg") },
-  chevrondown: { src: "/stack-icons/chevrondown.svg" },
-  chevronright: { src: "/stack-icons/chevronright.svg" },
+  chevrondown: { src: icon("stack-icons/chevrondown.svg") },
+  chevronright: { src: icon("stack-icons/chevronright.svg") },
 
   // Utility catalog
   chevronleft: { src: catalog("Utility Icons/C/chevronleft.svg") },
