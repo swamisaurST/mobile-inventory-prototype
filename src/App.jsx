@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
 import { BottomTabs } from "./stack/MobileShell";
 import { useSpruceInventory } from "./hooks/useSpruceInventory";
-import { SCREENS, SCREEN_ORDER, WORKFLOW_GROUPS } from "./workflows";
+import AnnotationPanel from "./stack/AnnotationPanel";
 import { assetUrl } from "./stack/assetUrl";
+import { SCREENS } from "./workflows";
 import {
   HomeScreen,
   MapScreen,
@@ -36,47 +37,6 @@ const NO_TAB_SCREENS = new Set([
   "jobDetails", "jobExecution", "jobEventTickets", "inventoryItem", "ticketDetail", "createTicket",
   "itemDetail", "fieldAssetDetail", "installConsume",
 ]);
-
-function AnnotationPanel({ screenId, onScreenChange, locateTab }) {
-  const meta = SCREENS[screenId];
-  return (
-    <div className="st-annotation-body">
-      <label className="st-annotation-label">Workflow</label>
-      <div className="st-workflow-chips">
-        {WORKFLOW_GROUPS.map((g) => (
-          <span key={g.id} className={`st-workflow-chip${meta?.group === g.id ? " st-workflow-chip--active" : ""}`}>{g.label}</span>
-        ))}
-      </div>
-      <label className="st-annotation-label" style={{ marginTop: 16 }}>Screen</label>
-      <select className="st-screen-select" value={screenId} onChange={(e) => onScreenChange(e.target.value)}>
-        {WORKFLOW_GROUPS.map((g) => (
-          <optgroup key={g.id} label={g.label}>
-            {SCREEN_ORDER.filter((id) => SCREENS[id].group === g.id).map((id) => (
-              <option key={id} value={id}>{SCREENS[id].title}</option>
-            ))}
-          </optgroup>
-        ))}
-      </select>
-      <h2 style={{ fontSize: 22, fontWeight: 700, margin: "16px 0 8px" }}>{meta.title}</h2>
-      {meta.description && (
-        <p style={{ fontSize: 14, color: "var(--st-text-weak)", lineHeight: 1.6, marginBottom: 16 }}>{meta.description}</p>
-      )}
-      {screenId === "locateInventory" && (
-        <p style={{ fontSize: 12, color: "var(--st-text-muted)" }}>
-          Toggle <strong>Field Assets</strong> in the phone — currently <strong>{locateTab === "fieldAssets" ? "Field Assets" : "Items"}</strong>.
-        </p>
-      )}
-      <div className="st-demo-paths">
-        <div className="st-annotation-label" style={{ marginTop: 20 }}>Demo paths</div>
-        <ul>
-          <li><strong>Spruce:</strong> Home → Job event → Install swap → Menu → Truck → Warehouse → Requests</li>
-          <li><strong>Production:</strong> Job execution → Inventory → Locate → Detail → Install or consume</li>
-          <li><strong>Tickets:</strong> Menu → Tickets (context screens bundled in repo)</li>
-        </ul>
-      </div>
-    </div>
-  );
-}
 
 export default function App() {
   const [screen, setScreen] = useState("home");
@@ -141,7 +101,7 @@ export default function App() {
       <aside className="st-annotation-panel">
         <div className="st-annotation-header">
           <img src={assetUrl("stack-icons/sitetracker-lettermark-white.svg")} alt="Sitetracker" />
-          <p>Mobile Inventory · all workflows</p>
+          <p>Mobile Inventory Prototype — STACK</p>
         </div>
         <AnnotationPanel screenId={screen} onScreenChange={handleScreenChange} locateTab={locateTab} />
       </aside>
@@ -157,8 +117,7 @@ export default function App() {
           </div>
           <div className="st-phone">{phone}</div>
           <p className="st-hint">
-            <strong>20 screens</strong> from folder docs — Spruce Phase 1, production inventory, app journey, and tickets context.
-            Start at <strong>Home</strong> for the narrated demo path.
+            <strong>Interactive:</strong> Tap elements in the phone to navigate. Use the screen map or dropdown on the left to jump to any screen.
           </p>
         </div>
       </main>
